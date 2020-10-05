@@ -1,0 +1,58 @@
+html {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    background-color: rgb(230, 227, 220);
+    /* color: #765; */
+    color: rgb(82, 82, 82);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#nav-bar {
+    position: relative;
+    display: flex;
+    width: 90vw;
+    justify-content: space-between;
+    height: 10rem;
+    margin: auto;
+}
+
+#nav-list {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+#nav-list li {
+    font-size: 2rem;
+    display: inline;
+    margin-right: 2rem;
+}
+
+#header-tail {
+    font-size: 2rem;
+    margin: auto 20px;
+}
+
+#header-tail>span {
+    margin-left: 2rem;
+}
+
+#logo {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    font-size: 4rem;
+    height: 100%;
+    top: 0;
+    z-index: -1;
+}

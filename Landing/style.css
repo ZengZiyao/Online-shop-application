@@ -1,0 +1,50 @@
+#full-page {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    background: url(../images/landing-bg.jpeg);
+    background-size: cover;
+}
+
+main {
+    margin-top: 25vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+main ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    font-size: 3rem;
+    height: 5rem;
+    align-items: flex-start;
+    transform: translateX(-7rem);
+}
+
+main ul li {
+    display: inline;
+    padding-top: 2rem;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+main ul li a {
+    transition: 0.4s;
+}
+
+main ul li a:hover {
+    color: rgb(124, 159, 181);
+}
+
+#landing-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-size: 4rem;
+}
