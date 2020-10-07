@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>Shop</title>
+</head>
+
+<body>
+    <div>
+        <div id="nav-bar">
+            <ul id="nav-list">
+                <li><a href="../Shop/index.html">Shop</a></li>
+                <li><a href="../About/index.html">About</a></li>
+                <li><a href="../Contact/index.html">Contact</a></li>
+            </ul>
+            <h3 id="logo">Anonymous</h3>
+            <div id="header-tail">
+                <span><a id="cart" href="../ShoppingCart/index.html"><i class="fa fa-shopping-cart"></i></a></span>
+                <span>|</span>
+                <span><a href="../Login/index.html">Account</a></span>
+            </div>
+        </div>
+        <main>
+            <div id="order-container">
+                <h1>Order Summary</h1>
+                <table id="item-table">
+                    <tr>
+                        <td class="image-cell">
+                            <img class="item-image" src="../images/product1.jpg" alt="product1">
+                        </td>
+                        <td>
+                            <p>Lounge Tunic / Black</p>
+                            <p>Color: <span>Black</span></p>
+                            <p>Size: <span>S</span></p>
+                        </td>
+                        <td>
+                            <p>QTY <span>1</span></p>
+                            <p>Price $<span>50.00</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="image-cell">
+                            <img class="item-image" src="../images/product2.jpg" alt="product2">
+                        </td>
+                        <td>
+                            <p>Lounge Tunic / Blue</p>
+                            <p>COLOR: <span>Blue</span></p>
+                            <p>SIZE: <span>M</span></p>
+                        </td>
+                        <td>
+                            <p>QTY <span>1</span></p>
+                            <p>Price $<span>50.00</span></p>
+                        </td>
+                    </tr>
+                    <tr class="border-top">
+                        <td colspan="2">Subtotal</td>
+                        <td>$<span>100.00</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">GST</td>
+                        <td>$<span>7.00</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Shipping Cost</td>
+                        <td>$<span>0.00</span></td>
+                    </tr>
+                    <tr class="border-top" id="total-price">
+                        <td colspan="2">Total</td>
+                        <td>$<span>107.00</span></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="payment-container">
+                <!-- <input id="saved-payment" type="submit" value="Use Saved Payment Method">
+                <input id="new-payment" type="submit" value="Use New Payment Method"> -->
+                <a class="button" id="saved-payment" href="../SavedPayment/index.html" >Use Saved Payment Method</a>
+                <a class="button" id="new-payment" href="../NewPayment/index.html">Use New Payment Method</a>
+
+                <!-- <input id="confirm" type="submit" value="Confirm"> -->
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
