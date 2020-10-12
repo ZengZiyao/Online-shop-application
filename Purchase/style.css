@@ -6,9 +6,7 @@ main {
 
 #order-container {
     width: 45%;
-    border: rgba(82, 82, 82, 0.6) solid 1.4rem;
-    padding: 10px;
-
+    padding: 1rem 3rem;
 }
 
 #item-table {
@@ -19,7 +17,6 @@ main {
 td {
     padding: 10px;
 }
-
 
 .border-top td {
     border-top: 1px dashed black;
@@ -44,7 +41,6 @@ td {
     margin: 0 0 auto auto;
     display: flex;
     flex-direction: column;
-    
 }
 
 .button {
@@ -61,7 +57,6 @@ td {
 #saved-payment {
     background-color: #5cb85c;
     width: 80%;
-
 }
 
 #new-payment {

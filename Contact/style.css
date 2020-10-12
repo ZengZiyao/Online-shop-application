@@ -16,8 +16,8 @@ main {
 }
 
 #form-container {
+    margin-top: 10rem;
     padding: 5rem;
-    border: rgba(82, 82, 82, 0.6) solid 1.4rem;
 }
 
 form {

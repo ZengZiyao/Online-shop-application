@@ -27,7 +27,7 @@
             </div>
         </div>
         <main>
-            <div id="order-container">
+            <div id="order-container" class="card">
                 <h1>Order Summary</h1>
                 <table id="item-table">
                     <tr>
@@ -76,21 +76,17 @@
                     </tr>
                 </table>
             </div>
-            <div id="info-container">
+            <div id="info-container" class="card">
+                <div id="title">
+                    <p>Use Saved Payment Method</p>
+                </div>
                 <table id="info-table">
-                    <thead>
-                        <tr class="border-bottom" id="saved-payment">
-                            <th colspan="2">Use Saved Payment Method</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <td colspan="2">
-                            <i class="fa fa-envelope" id="envelope-icon"></i>
-                            <span>1232435456465656476</span>
+                            <span>1234 5678 1234 5678/xxx</span>
                         </td>
-                        </tr>
                         <tr class="info-title">
-                            <td> Shipping Address</td>
+                            <td>Shipping Address</td>
                             <td>Billing Address</td>
                         </tr>
                         <tr>
@@ -109,14 +105,11 @@
                                 email@gmail.com
                             </td>
                         </tr>
-
                     </tbody>
                     <tr>
                 </table>
-                <input type="submit" value="Confirm">
-
+                <input id="confirm" type="submit" value="Confirm">
             </div>
-
         </main>
     </div>
 </body>
