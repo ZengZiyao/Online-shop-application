@@ -2,13 +2,13 @@ main {
     width: 80vw;
     margin: auto;
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 #order-container {
-    width: 45%;
-    border: rgba(82, 82, 82, 0.6) solid 1.4rem;
-    padding: 10px;
-
+    width: 50%;
+    padding: 1rem 3rem;
 }
 
 #item-table {
@@ -17,15 +17,12 @@ main {
 }
 
 #info-container {
-    width: 55%;
-    margin-left: 40px;
+    width: 45%;
     display: flex;
     flex-direction: column;
-    justify-content: right;
 }
 
 form {
-    border: rgba(82, 82, 82, 0.6) solid 1.4rem;
     border-spacing: 0;
     padding-bottom: 10px;
     display: flex;
@@ -33,15 +30,17 @@ form {
     justify-content: center;
 }
 
-
 #form-body {
-    padding: 10px 15px;
+    padding: 2rem 3rem;
+}
+
+#confirm {
+    margin: 0 3rem 2rem;
 }
 
 #item-table td {
     padding: 10px;
 }
-
 
 .border-top td {
     border-top: 1px dashed black;
@@ -66,7 +65,6 @@ form {
     margin: 0 0 auto auto;
     display: flex;
     flex-direction: column;
-    
 }
 
 input[type=submit] {
@@ -79,14 +77,13 @@ input[type=submit] {
     margin-bottom: 15px;
 }
 
-#new-payment {
+#title {
     background-color: #f0ad4e;
+    color: #333;
     text-align: center;
     font-size: 1.5rem;
-    height: 8vh;
     font-weight: bold;
 }
-
 
 .flex-container {
     display: flex;
@@ -101,7 +98,6 @@ input[type=submit] {
 .quarter-container {
     width: 24%;
 }
-
 
 input:not([type="submit"]) {
     width: 100%;

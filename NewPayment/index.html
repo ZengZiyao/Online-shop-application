@@ -27,7 +27,7 @@
             </div>
         </div>
         <main>
-            <div id="order-container">
+            <div id="order-container" class="card">
                 <h1>Order Summary</h1>
                 <table id="item-table">
                     <tr>
@@ -77,8 +77,8 @@
                 </table>
             </div>
             <div id="info-container">
-                <form>
-                    <div id="new-payment">
+                <form class="card">
+                    <div id="title">
                         <p>Use New Payment Method</p>
                     </div>
                     <div id="form-body">
@@ -101,22 +101,21 @@
                                 <label for="shipping-address">Shipping Address</label>
                                 <input id="shipping-address" name="shipping-address" type="text">
                                 <input id="shipping-address-optional" name="shipping-address" type="text">
-
                             </div>
-                            <div class="half-container">
+                            <div class="quarter-container">
                                 <label for="postal-code">Postal Code</label>
                                 <input id="postal-code" name="postal-code" type="text">
+                            </div>
+                            <div class="quarter-container">
                             </div>
                         </div>
                         <div class="half-container">
                             <label for="email">Contact Email</label>
                             <input id="email" name="email" type="email">
-
                         </div>
                     </div>
-
+                    <input id="confirm" type="submit" value="Confirm">
                 </form>
-                <input id="confirm" type="submit" value="Confirm">
 
             </div>
 
