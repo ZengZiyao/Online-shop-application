@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>Shop</title>
+</head>
+
+<body>
+    <div>
+        <div id="nav-bar">
+            <ul id="nav-list">
+                <li><a href="../Shop/index.html">Shop</a></li>
+                <li><a href="../About/index.html">About</a></li>
+                <li><a href="../Contact/index.html">Contact</a></li>
+            </ul>
+            <h3 id="logo">Anonymous</h3>
+            <div id="header-tail">
+                <span><a id="cart" href="../ShoppingCart/index.html"><i class="fa fa-shopping-cart"></i></a></span>
+                <span>|</span>
+                <span><a href="../Login/index.html">Account</a></span>
+            </div>
+        </div>
+        <main>
+            <div class="flex-container">
+
+                <div id="gallery-container">
+                    <div id="image-column">
+                        <img src="../images/product-detail1.jpg" alt="product-detail1" class="thumbnail">
+                        <img src="../images/product-detail2.jpg" alt="product-detail2" class="thumbnail">
+                    </div>
+                    <div id="selected">
+                        <img src="../images/product-detail1.jpg" alt="selected-image" id="selected-image">
+                    </div>
+                </div>
+                <div id="details-container">
+                    <h1 id="title">Lounge Tunic / Black</h1>
+                    <h2>$<span>50.00</span></h2>
+                    <h3>DESCRIPTION</h3>
+                    <p id="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                    <form>
+                        <select name="size" id="size">
+                            <option value="" selected>Select Size</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                        <input type="number" id="qty" value="0" min="0">
+                        <input type="submit" value="Add To Cart">
+                        <input type="submit" value="Purchase">
+
+                    </form>
+
+                </div>
+            </div>
+
+            <div id="recommendation">
+                <h1>You Might Also Like</h1>
+                <div id="clothes-listing">
+                    <div class="product">
+                        <img src="../images/product2.jpg" alt="product">
+                        <div>
+                            <h4><b>Lounge Tunic / Blue</b></h4>
+                            <p>$50.00</p>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <img src="../images/product3.jpg" alt="product">
+                        <div>
+                            <h4><b>Lounge Tunic / Cream</b></h4>
+                            <p>$50.00</p>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <img src="../images/product4.jpg" alt="product">
+                        <div>
+                            <h4><b>Sonia Skirt</b></h4>
+                            <p>$50.00</p>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <img src="../images/product3.jpg" alt="product">
+                        <div>
+                            <h4><b>Lounge Tunic / Cream</b></h4>
+                            <p>$50.00</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
