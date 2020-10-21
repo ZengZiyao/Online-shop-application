@@ -1,0 +1,65 @@
+main {
+    width: 80vw;
+    margin: auto;
+    display: flex;
+}
+
+#order-container {
+    width: 45%;
+    padding: 1rem 3rem;
+}
+
+#item-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 10px;
+}
+
+.border-top td {
+    border-top: 1px dashed black;
+}
+
+.image-cell {
+    width: 150px;
+    height: 150px;
+}
+
+.item-image {
+    width: 100%;
+    height: 100%;
+}
+
+#total-price {
+    font-size: 1.5rem;
+}
+
+#payment-container {
+    width: 55%;
+    margin: 0 0 auto auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    border-radius: 6px;
+    background: transparent;
+    border: #765 solid 2px;
+    font-size: 1.5rem;
+    padding: 10px 15px;
+    margin-left: auto;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#saved-payment {
+    background-color: #5cb85c;
+    width: 80%;
+}
+
+#new-payment {
+    background-color: #f0ad4e;
+    width: 80%;
+}

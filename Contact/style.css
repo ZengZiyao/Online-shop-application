@@ -10,14 +10,13 @@ main {
 #desc {
     font-size: 2rem;
     line-height: 4rem;
-    padding: 0 10rem 2rem;
-    margin: 0 4rem 5rem;
-    width: 50%;
+    margin: 0 4rem 5rem; 
+    width: 100%;
 }
 
 #form-container {
+    margin-top: 10rem;
     padding: 5rem;
-    border: rgba(82, 82, 82, 0.6) solid 1.4rem;
 }
 
 form {
