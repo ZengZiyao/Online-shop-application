@@ -1,0 +1,135 @@
+/* cs */
+
+main {
+    display: flex;
+    width: 90vw;
+    margin: auto;
+    justify-content: space-between;
+    padding-bottom: 10vh;
+}
+
+.carousel-wrapper {
+    width: 40%;
+    position: relative;
+    margin: 0 5vh;
+}
+
+.carousel-item {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 5px;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-item>img {
+    height: 100%;
+    width: 100%;
+    align-self: center;
+    object-fit: cover;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 12px;
+}
+
+.arrow-prev {
+    left: -30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(135deg);
+}
+
+.arrow-next {
+    right: -30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+@media (max-width: 480px) {
+    .arrow {
+        background-size: 10px;
+        background-position: 10px 50%;
+    }
+}
+
+/* Select every element */
+
+[id^="item"] {
+    display: none;
+}
+
+.item-1 {
+    z-index: 2;
+    opacity: 1;
+}
+
+*:target~.item-1 {
+    opacity: 0;
+}
+
+#item-1:target~.item-1 {
+    opacity: 1;
+}
+
+#item-2:target~.item-2, #item-3:target~.item-3 {
+    z-index: 3;
+    opacity: 1;
+}
+
+#form-container {
+    width: 50%;
+    padding: 5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+label {
+    font-size: 2rem;
+}
+
+#sub-container {
+    padding-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#sub-container div {
+    width: 48%;
+}
+
+input {
+    width: 100%;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 10px;
+}
+
+input[type=submit] {
+    border-radius: 6px;
+    background: transparent;
+    border: #765 solid 2px;
+    font-size: 2rem;
+    padding: 10px 15px;
+    margin-left: auto;
+    width: 40%;
+}
