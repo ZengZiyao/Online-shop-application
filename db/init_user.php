@@ -15,9 +15,9 @@ $sql = "CREATE TABLE IF NOT EXISTS Users (
     id INT(6) UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     username(20) VARCHAR NOT NULL,
     email(10) VARCHAR NOT NULL,
-    password_hash VARCHAR(50) NOT NULL,
-    salt VARCHAR(50) NOT NULL,
-    image_url VARCHAR(50)
+    password_hash CHAR NOT NULL,
+    salt CHAR NOT NULL,
+    image_url VARCHAR(255)
 )";
 
 if (mysqli_query($conn, $sql)) {
