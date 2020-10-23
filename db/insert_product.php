@@ -12,7 +12,7 @@ if (!$conn) {
 }
 
 $insert_sql = "INSERT INTO Products(image_url, price, name, description) VALUES 
-('https://images.squarespace-cdn.com/content/v1/5d02d798cc25920001b61816/1562770837698-FMNKJ1A4GRW0EYTHCPDD/ke17ZwdGBToddI8pDm48kNgFyjlEyNHlSWEjE-QCU1p7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UdLKTLgsLX9_T7LnpaostY9WYLb0IFNaX6bgMhY2dUNBWIB-7cQgYKo_bDpR6cEVkg/ulihu-charcoal-silk-linen-tunic_0326-v1-FINAL-copy.jpg?format=750w'， 50.00， 'Lounge Tunic / Black'， 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')，
+('https://images.squarespace-cdn.com/content/v1/5d02d798cc25920001b61816/1562770837698-FMNKJ1A4GRW0EYTHCPDD/ke17ZwdGBToddI8pDm48kNgFyjlEyNHlSWEjE-QCU1p7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UdLKTLgsLX9_T7LnpaostY9WYLb0IFNaX6bgMhY2dUNBWIB-7cQgYKo_bDpR6cEVkg/ulihu-charcoal-silk-linen-tunic_0326-v1-FINAL-copy.jpg?format=750w', 50.00, 'Lounge Tunic / Black', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
 ('https://images.squarespace-cdn.com/content/v1/5d02d798cc25920001b61816/1562797313348-RV3I7WY2DOYUQ3ZLZA61/ke17ZwdGBToddI8pDm48kNgFyjlEyNHlSWEjE-QCU1p7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UdLKTLgsLX9_T7LnpaostY9WYLb0IFNaX6bgMhY2dUNBWIB-7cQgYKo_bDpR6cEVkg/ulihu-blue-linen-tunic_0308-v1-FINAL-copy.jpg?format=750w', 50.00, 'Lounge Tunic / Blue', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
 ('https://images.squarespace-cdn.com/content/v1/5d02d798cc25920001b61816/1560522174782-G9Z1KCIOM3D9FXP19G8W/ke17ZwdGBToddI8pDm48kNgFyjlEyNHlSWEjE-QCU1p7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UdLKTLgsLX9_T7LnpaostY9WYLb0IFNaX6bgMhY2dUNBWIB-7cQgYKo_bDpR6cEVkg/lauren-winter-natural-dress_0172-v1-FINAL-copy.jpg?format=750w', 40.00, 'Lounge Tunic / Cream', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
 ('https://images.squarespace-cdn.com/content/v1/5d02d798cc25920001b61816/1560521851099-Y8NGHHO3QX5EVA0JBN9T/ke17ZwdGBToddI8pDm48kNgFyjlEyNHlSWEjE-QCU1p7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UdLKTLgsLX9_T7LnpaostY9WYLb0IFNaX6bgMhY2dUNBWIB-7cQgYKo_bDpR6cEVkg/lauren-winter-sonia-skirt-grey_0270-v1-FINAL-copy.jpg?format=750w', 50.00, 'Sonia Skirt', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
@@ -33,11 +33,11 @@ for ($i = 0; $i < mysqli_num_rows($result); $i++) {
     $id = mysqli_fetch_assoc($result)["id"];
 
     $sql = "INSERT INTO Inventories(pid, size) VALUES
-    (" . $id . " 'S'),
-    (" . $id . " 'M'),
-    (" . $id . " 'L'),
-    (" . $id . " 'XL'),
-    (" . $id . " 'XXL');";
+    (" . $id . ", 'S'),
+    (" . $id . ", 'M'),
+    (" . $id . ", 'L'),
+    (" . $id . ", 'XL'),
+    (" . $id . ", 'XXL');";
 
     if (mysqli_query($conn, $sql)) {
         echo "Inventory inserted successfully";

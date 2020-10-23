@@ -13,12 +13,13 @@ if (!$conn) {
 
 $sql = "CREATE TABLE IF NOT EXISTS Users (
     id INT(6) UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    username(20) VARCHAR NOT NULL,
-    email(10) VARCHAR NOT NULL,
+    username VARCHAR(20) NOT NULL,
+    email VARCHAR(10) NOT NULL,
     password_hash CHAR NOT NULL,
     salt CHAR NOT NULL,
     image_url VARCHAR(255)
 )";
+
 
 if (mysqli_query($conn, $sql)) {
     echo "Table Users created successfully";

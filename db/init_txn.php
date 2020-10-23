@@ -13,11 +13,10 @@ if (!$conn) {
 
 $sql = "CREATE TABLE IF NOT EXISTS Transactions (
     id INT(6) UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    pi_id INT(6) UNSIGNED NOT NULL,
+    i_id INT(6) UNSIGNED NOT NULL,
     uid INT(6) UNSIGNED NOT NULL,
-    amount INT(3) UNSIGHED NOT NULL,
-    FOREIGN KEY(pi_id) REFERENCES Product_inventory(id)
-
+    amount INT(3) UNSIGNED NOT NULL,
+    FOREIGN KEY(i_id) REFERENCES Inventories(id)
 )";
 
 if (mysqli_query($conn, $sql)) {
