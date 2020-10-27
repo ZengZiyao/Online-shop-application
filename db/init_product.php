@@ -12,12 +12,11 @@ if (!$conn) {
 }
 
 $sql = "CREATE TABLE IF NOT EXISTS Products (
-    id INT(6) UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    image_url VARCHAR(50) NOT NULL,
+    id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     price FLOAT NOT NULL,
     name VARCHAR(50) NOT NULL,
-    description VARCHAR(50) NOT NULL
-
+    description VARCHAR(250) NOT NULL,
+    image_url VARCHAR(250) NOT NULL
 )";
 
 if (mysqli_query($conn, $sql)) {
