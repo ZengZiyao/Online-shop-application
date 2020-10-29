@@ -23,9 +23,9 @@ $sql = "CREATE TABLE IF NOT EXISTS ShopItem (
 )";
 
 if (mysqli_query($conn, $sql)) {
-    echo "Table Transactions created successfully";
+    echo "Table Transactions created successfully<br>";
 } else {
-    echo "Failed creation";
+    echo "Failed creation<br>";
 }
 
 $sql = "CREATE TABLE IF NOT EXISTS Invoices (
@@ -36,15 +36,15 @@ $sql = "CREATE TABLE IF NOT EXISTS Invoices (
 )";
 
 if (mysqli_query($conn, $sql)) {
-    echo "Table Transactions created successfully";
+    echo "Table Transactions created successfully<br>";
 } else {
-    echo "Failed creation";
+    echo "Failed creation<br>";
 }
 
 $sql = "CREATE TABLE IF NOT EXISTS Transactions (
     id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    invoice_id INT NOT NULL,
-    item_id INT NOT NULL,
+    invoice_id INT UNSIGNED NOT NULL,
+    item_id INT UNSIGNED NOT NULL,
     FOREIGN KEY(invoice_id) REFERENCES Invoices(id),
     FOREIGN KEY(item_id) REFERENCES ShopItem(id)
 )";
