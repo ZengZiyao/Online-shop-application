@@ -15,8 +15,8 @@ $sql = "CREATE TABLE IF NOT EXISTS Users (
     id INT(6) UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     username VARCHAR(20) NOT NULL,
     email VARCHAR(10) NOT NULL,
-    password_hash CHAR NOT NULL,
-    salt CHAR NOT NULL,
+    password_hash CHAR(40) NOT NULL,
+    salt CHAR(40) NOT NULL,
     image_url VARCHAR(255)
 )";
 
