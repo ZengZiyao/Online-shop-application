@@ -25,10 +25,7 @@
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        $sql = "SELECT Products.id as id, Products.price as price, Products.name as name, Images.url as image_url, MIN(Images.id) as image_id FROM Products
-        JOIN Images
-        ON Products.id = Images.pid
-        GROUP BY Products.id;";
+        $sql = "SELECT id, price, name, primary_image as image_url FROM Products";
 
         $result = mysqli_query($conn, $sql);
 

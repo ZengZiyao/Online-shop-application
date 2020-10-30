@@ -29,11 +29,6 @@
     $sql = "SELECT * FROM Products WHERE id = " . $pid;
     $product = mysqli_fetch_assoc(mysqli_query($conn, $sql));
 
-    $image_sql = "SELECT url FROM Images WHERE pid = " . $pid;
-    $images = mysqli_query($conn, $image_sql);
-
-    $image_1 = mysqli_fetch_row($images);
-    $image_2 = mysqli_fetch_row($images);
     ?>
     <div>
         <div id="nav-bar">
@@ -54,11 +49,11 @@
 
                 <div id="gallery-container">
                     <div id="image-column">
-                        <img src="<?php echo $image_1[0] ?>" alt="product-detail1" class="thumbnail" onclick="selectImage('<?php echo $image_1[0] ?>')">
-                        <img src="<?php echo $image_2[0] ?>" alt="product-detail2" class="thumbnail" onclick="selectImage('<?php echo $image_2[0] ?>')">
+                        <img src="<?php echo $product['primary_image'] ?>" alt="product-detail1" class="thumbnail" onclick="selectImage('<?php echo $product['primary_image'] ?>')">
+                        <img src="<?php echo $product['second_image'] ?>" alt="product-detail2" class="thumbnail" onclick="selectImage('<?php echo $product['second_image'] ?>')">
                     </div>
                     <div id="selected">
-                        <img src="<?php echo $image_1[0] ?>" alt="selected-image" id="selected-image">
+                        <img src="<?php echo $product['primary_image'] ?>" alt="selected-image" id="selected-image">
                     </div>
                 </div>
                 <div id="details-container">
@@ -67,7 +62,7 @@
                     <h3>DESCRIPTION</h3>
                     <p id="description"><?php echo $product['description'] ?>
                     </p>
-                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']."?id=".$pid ?>">
+                    <form id="form" method="POST">
                         <input type="hidden" name="price" value="<?php echo $product['price'] ?>">
                         <select name="size" id="size">
                             <option value="" selected>Select Size</option>
@@ -78,8 +73,9 @@
                         </select>
                         <input type="number" id="qty" name="quantity" value="1" min="1">
                         <div id="button-container">
-                            <input type="submit" name="cart" value="Add To Cart">
-                            <input type="submit" name="purchase" value="Purchase">
+                            <input type="submit" name="cart" value="Add To Cart" onclick="submitForm(<?php echo $_SERVER['PHP_SELF'] . "?id=" . $pid ?>)">
+                            <!-- TODO: add purchase action -->
+                            <input type="submit" name="purchase" value="Purchase" onclick="submitForm()">
                         </div>
 
                     </form>
@@ -91,11 +87,7 @@
                 <h1>You Might Also Like</h1>
                 <div id="clothes-listing">
                     <?php
-                    $sql = "SELECT Products.id as id, Products.price as price, Products.name as name, Images.url as image_url, MIN(Images.id) as image_id FROM Products
-                            JOIN Images
-                            ON Products.id = Images.pid
-                            GROUP BY Products.id
-                            LIMIT 4;";
+                    $sql = "SELECT id, price, name, primary_image as image_url FROM Products LIMIT 4;";
 
                     $result = mysqli_query($conn, $sql);
 
@@ -113,8 +105,8 @@
                     }
 
                     for ($i = 0; $i < mysqli_num_rows($result); $i++) {
-                        $product = mysqli_fetch_row($result);
-                        render_product($product[0], $product[1], $product[2], $product[3]);
+                        $product = mysqli_fetch_assoc($result);
+                        render_product($product['id'], $product['price'], $product['name'], $product['image_url']);
                     }
 
                     ?>
@@ -130,25 +122,31 @@
         $qty = $_POST["quantity"];
         $price = $_POST["price"];
 
-        if (isset($_POST["cart"])) {
-            $sql = "SELECT id FROM Inventories WHERE pid = ".$pid." AND size = '".$size."'";
-            $iid = mysqli_fetch_assoc(mysqli_query($conn, $sql))["id"];
+        $sql = "SELECT id FROM Inventories WHERE pid = " . $pid . " AND size = '" . $size . "'";
+        $iid = mysqli_fetch_assoc(mysqli_query($conn, $sql))["id"];
 
-            // Update Inventories
-            $sql = "UPDATE Inventories SET inventory = inventory - ".$qty." WHERE id = ".$iid;
-            mysqli_query($conn, $sql);
+        // Update Inventories
+        $sql = "UPDATE Inventories SET inventory = inventory - " . $qty . " WHERE id = " . $iid;
+        mysqli_query($conn, $sql);
 
-            //Insert into ShopItems
-            //TODO: replace uid
-            $sql = "INSERT INTO ShopItem(iid, amount, price, uid) VALUES (".$iid.", ".$qty. ", ".$price.", 1)";
-            mysqli_query($conn, $sql);
-        }
+        //Insert into ShopItems
+        //TODO: replace uid
+        $sql = "INSERT INTO ShopItem(iid, amount, price, uid) VALUES (" . $iid . ", " . $qty . ", " . $price . ", 1)";
+        mysqli_query($conn, $sql);
+
+        echo "<script>alert('Product added successfully!');</script>";
     }
 
     ?>
     <script>
         function selectImage(image_url) {
             document.getElementById("selected-image").src = image_url;
+        }
+
+        function submitForm(action) {
+            var form = document.getElementById("form");
+            form.action = action;
+            form.submit();
         }
     </script>
 </body>
