@@ -16,7 +16,6 @@ $sql = "CREATE TABLE IF NOT EXISTS ShopItem (
     iid INT UNSIGNED NOT NULL,
     uid INT UNSIGNED NOT NULL,
     amount INT UNSIGNED NOT NULL,
-    price FLOAT NOT NULL,
     completed BOOLEAN DEFAULT false,
     FOREIGN KEY(iid) REFERENCES Inventories(id),
     FOREIGN KEY(uid) REFERENCES Users(id)
@@ -45,6 +44,7 @@ $sql = "CREATE TABLE IF NOT EXISTS Transactions (
     id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     invoice_id INT UNSIGNED NOT NULL,
     item_id INT UNSIGNED NOT NULL,
+    price FLOAT NOT NULL,
     FOREIGN KEY(invoice_id) REFERENCES Invoices(id),
     FOREIGN KEY(item_id) REFERENCES ShopItem(id)
 )";

@@ -50,7 +50,7 @@
             </ul>
             <h3 id="logo">Anonymous</h3>
             <div id="header-tail">
-                <span><a id="cart" href="../ShoppingCart/index.html"><i class="fa fa-shopping-cart"></i></a></span>
+                <span><a id="cart" href="../ShoppingCart/index.php"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
                 <span><a href="../Login/index.html">Account</a></span>
             </div>
@@ -80,10 +80,10 @@
             </div>
             <div id="clothes-listing">
                 <?php
-                        for ($i = 0; $i < mysqli_num_rows($result); $i++) {
-                            $product = mysqli_fetch_assoc($result);
-                            render_product($product['id'], $product['price'], $product['name'], $product['image_url']);
-                        }
+                for ($i = 0; $i < mysqli_num_rows($result); $i++) {
+                    $product = mysqli_fetch_assoc($result);
+                    render_product($product['id'], $product['price'], $product['name'], $product['image_url']);
+                }
                 ?>
             </div>
         </main>

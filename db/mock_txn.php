@@ -8,24 +8,18 @@ $dbname = "f38ee";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
 if (!$conn) {
-    die("Connection failed: ".mysqli_connect_error());
+    die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "CREATE TABLE IF NOT EXISTS Users (
-    id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    username VARCHAR(20) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    password_hash CHAR(60) NOT NULL,
-    salt CHAR(60) NOT NULL
-)";
-
+$sql = "INSERT INTO ShopItem(iid, uid, amount) VALUES 
+(1, 1, 3),
+(12, 1, 3),
+(24, 1, 3)";
 
 if (mysqli_query($conn, $sql)) {
     echo "Table Users created successfully";
 } else {
-    echo "Failed creation";
+    echo "Failed insertion";
 }
 
 mysqli_close($conn);
-
-?>

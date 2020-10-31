@@ -12,6 +12,42 @@
 </head>
 
 <body>
+    <?php
+    $servername = "localhost";
+    $username = "f38ee";
+    $password = "f38ee";
+    $dbname = "f38ee";
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $sql = "SELECT name, size, primary_image, amount, Products.price * amount AS p
+FROM ShopItem
+INNER JOIN Users ON Users.id = ShopItem.uid
+INNER JOIN Inventories ON Inventories.id = ShopItem.iid
+INNER JOIN Products ON Products.id = Inventories.pid;";
+
+    $result = mysqli_query($conn, $sql);
+    $price_sum = 0;
+
+    function render_txn($name, $image, $size, $amount, $price)
+    {
+        echo "<tr>
+                <td class='image-cell'>
+                    <img class='item-image' src='" . $image . "' alt='product1'>
+                </td>
+                <td>
+                    <p>" . $name . "</p>
+                    <p>Size: <span>" . $size . "</span></p>
+                </td>
+                <td>
+                    <p>QTY <span>" . $amount . "</span></p>
+                    <p>Price $" . number_format($amount * $price, 2) . "</p>
+                </td>
+            </tr>";
+    }
+    ?>
     <div>
         <div id="nav-bar">
             <ul id="nav-list">
@@ -21,7 +57,7 @@
             </ul>
             <h3 id="logo">Anonymous</h3>
             <div id="header-tail">
-                <span><a id="cart" href="../ShoppingCart/index.html"><i class="fa fa-shopping-cart"></i></a></span>
+                <span><a id="cart" href="../ShoppingCart/index.php"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
                 <span><a href="../Login/index.html">Account</a></span>
             </div>
@@ -30,41 +66,20 @@
             <div id="order-container" class="card">
                 <h1>Order Summary</h1>
                 <table id="item-table">
-                    <tr>
-                        <td class="image-cell">
-                            <img class="item-image" src="../images/product1.jpg" alt="product1">
-                        </td>
-                        <td>
-                            <p>Lounge Tunic / Black</p>
-                            <p>Color: <span>Black</span></p>
-                            <p>Size: <span>S</span></p>
-                        </td>
-                        <td>
-                            <p>QTY <span>1</span></p>
-                            <p>Price $<span>50.00</span></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="image-cell">
-                            <img class="item-image" src="../images/product2.jpg" alt="product2">
-                        </td>
-                        <td>
-                            <p>Lounge Tunic / Blue</p>
-                            <p>COLOR: <span>Blue</span></p>
-                            <p>SIZE: <span>M</span></p>
-                        </td>
-                        <td>
-                            <p>QTY <span>1</span></p>
-                            <p>Price $<span>50.00</span></p>
-                        </td>
-                    </tr>
+                    <?php
+                    for ($i = 0; $i < mysqli_num_rows($result); $i++) {
+                        $p = mysqli_fetch_assoc($result);
+                        render_txn($p['name'],$p['primary_image'],$p['size'],$p['amount'],$p['p']);
+                        $price_sum += $p['amount']*$p['p'];
+                    }
+                    ?>
                     <tr class="border-top">
                         <td colspan="2">Subtotal</td>
-                        <td>$<span>100.00</span></td>
+                        <td>$<span><?php echo number_format($price_sum, 2)?></span></td>
                     </tr>
                     <tr>
                         <td colspan="2">GST</td>
-                        <td>$<span>7.00</span></td>
+                        <td>$<span><?php echo number_format($price_sum * 0.07, 2)?></span></td>
                     </tr>
                     <tr>
                         <td colspan="2">Shipping Cost</td>
@@ -72,7 +87,7 @@
                     </tr>
                     <tr class="border-top" id="total-price">
                         <td colspan="2">Total</td>
-                        <td>$<span>107.00</span></td>
+                        <td>$<span><?php echo number_format($price_sum * 1.07, 2)?></span></td>
                     </tr>
                 </table>
             </div>
