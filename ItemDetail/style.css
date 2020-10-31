@@ -59,7 +59,7 @@ select {
 }
 
 input[type=submit] {
-    width: 49%;
+    width: 48%;
     margin-top: 40px;
     border-radius: 6px;
     background: transparent;
@@ -90,4 +90,10 @@ input[type=submit] {
 
 #recommendation h1 {
     font-size: 2.5rem;
+}
+
+#button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
