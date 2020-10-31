@@ -23,7 +23,7 @@
             <div id="header-tail">
                 <span><a id="cart" href="../ShoppingCart/index.php"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
-                <span><a href="../Login/index.php">Account</a></span>
+                <span><a href="../Account/index.php">Account</a></span>
             </div>
         </div>
         <main>
@@ -82,13 +82,17 @@
                 die("Connection failed: " . mysqli_connect_error());
             }
 
-            $sql = "SELECT password_hash FROM Users WHERE email = '".$email."'";
+            $sql = "SELECT id, password_hash FROM Users WHERE email = '".$email."'";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
-                $password_hash = mysqli_fetch_assoc($result)["password_hash"];
+                $user = mysqli_fetch_assoc($result);
 
-                if (password_verify($account_password, $password_hash)) {
+                if (password_verify($account_password, $user["password_hash"])) {
+    
+                    session_start();
+                    $_SESSION["uid"] = $user["id"];
+                    
                     header("Location: http://".$_SERVER["HTTP_HOST"]."/f38ee/Online-shop-application/Shop/index.php");
                 } else {
                     echo "<script>alert('Wrong Credentials!')</script>";

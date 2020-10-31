@@ -13,6 +13,14 @@
 
 <body>
     <?php
+    session_start();
+    $uid = $_SESSION["uid"];
+
+    if (!isset($uid)) {
+        header("Location: ../Login/index.php");
+    } else {
+
+    
     $servername = "localhost";
     $username = "f38ee";
     $password = "f38ee";
@@ -27,7 +35,7 @@ FROM ShopItem
 INNER JOIN Users ON Users.id = ShopItem.uid
 INNER JOIN Inventories ON Inventories.id = ShopItem.iid
 INNER JOIN Products ON Products.id = Inventories.pid
-WHERE completed=0 && Users.id = 1;";
+WHERE completed=0 && Users.id = ".$uid.";";
 
     $result = mysqli_query($conn, $sql);
     $price_sum = 0;
@@ -47,6 +55,7 @@ WHERE completed=0 && Users.id = 1;";
                 <td>$" . number_format($price, 2) . "</td>
             </tr>";
     }
+}
     ?>
     <div>
         <div id="nav-bar">
@@ -59,7 +68,7 @@ WHERE completed=0 && Users.id = 1;";
             <div id="header-tail">
                 <span><a id="cart"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
-                <span><a href="../Login/index.php">Account</a></span>
+                <span><a href="../Account/index.php">Account</a></span>
             </div>
         </div>
         <main>
