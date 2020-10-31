@@ -136,11 +136,13 @@
         if (mysqli_num_rows(mysqli_query($conn, $sql)) > 0) {
             $sql = "UPDATE ShopItem SET amount = amount + ".$qty." WHERE iid = ".$iid." AND uid = 1";
         } else {
-            $sql = "INSERT INTO ShopItem(iid, amount, price, uid) VALUES (" . $iid . ", " . $qty . ", " . $price . ", 1)";
+            $sql = "INSERT INTO ShopItem(iid, amount, uid) VALUES (" . $iid . ", " . $qty . ", 1)";
         }
-        mysqli_query($conn, $sql);
-
-        echo "<script>alert('Product added successfully!');</script>";
+        if (mysqli_query($conn, $sql)) {
+            echo "<script>alert('Product added successfully!');</script>";
+        } else {
+            echo "<script>alert('Something went wrong!');</script>";
+        }
     }
 
     ?>
