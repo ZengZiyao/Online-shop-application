@@ -60,21 +60,14 @@ main {
     flex-direction: column;
 }
 
-form {
-    width: 100%;
-    position: relative;
-    display: flex;
-    justify-content: stretch;
-}
-
-#confirm {
-    width: 90%;
+input[type=submit] {
     border-radius: 6px;
     background: transparent;
     border: #765 solid 2px;
     font-size: 1.5rem;
-    padding: 10px 0;
-    margin: 1rem 5% 2rem;
+    padding: 10px 15px;
+    margin: 20px 0 10px auto;
+    margin-bottom: 15px;
 }
 
 #title {
@@ -83,6 +76,10 @@ form {
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+#confirm {
+    margin: 0 3rem 2rem;
 }
 
 #envelope-icon {
