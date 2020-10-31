@@ -65,11 +65,12 @@
                     <form id="form" method="POST">
                         <input type="hidden" name="price" value="<?php echo $product['price'] ?>">
                         <select name="size" id="size">
-                            <option value="" selected>Select Size</option>
                             <option value="S">S</option>
-                            <option value="M">M</option>
+                            <option value="M" selected>M</option>
                             <option value="L">L</option>
                             <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+
                         </select>
                         <input type="number" id="qty" name="quantity" value="1" min="1">
                         <div id="button-container">

@@ -52,11 +52,11 @@
             <div id="form-container" class="card">
                 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
+                    <input type="text" id="username" name="username" pattern="[a-zA-Z1-9]+" title="Alphanumeric characters only" required>
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                     <label for="confirm-password">Confirm Password</label>
                     <input type="password" id="confirm-password" name="confirm-password" required>
                     <input type="submit" name="signup" value="Sign Up" id="signup" onclick="validatePassword()">
