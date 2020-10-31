@@ -15,13 +15,11 @@
     <?php
     $pid = $_GET["id"];
     $servername = "localhost";
-    $username = "f38ee";
-    $password = "f38ee";
+    $dbuser = "f38ee";
+    $dbpass = "f38ee";
     $dbname = "f38ee";
 
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    // Check connection
+    $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
@@ -107,7 +105,6 @@
                         $product = mysqli_fetch_assoc($result);
                         render_product($product['id'], $product['price'], $product['name'], $product['image_url']);
                     }
-
                     ?>
 
                 </div>
@@ -119,8 +116,6 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         $uid = $_SESSION["uid"];
-        
-        echo !isset($uid);
 
         if (!isset($uid)) {
             echo "<script>window.location.href='../Login/index.php';</script>";

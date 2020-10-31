@@ -18,10 +18,10 @@
             
     
     $servername = "localhost";
-    $username = "f38ee";
-    $password = "f38ee";
+    $dbuser = "f38ee";
+    $dbpass = "f38ee";
     $dbname = "f38ee";
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
