@@ -22,16 +22,19 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $sql = "SELECT name, size, primary_image, amount, Products.price * amount AS p
-FROM ShopItem
-INNER JOIN Users ON Users.id = ShopItem.uid
-INNER JOIN Inventories ON Inventories.id = ShopItem.iid
-INNER JOIN Products ON Products.id = Inventories.pid
-WHERE completed=0 && Users.id = 1;";
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $id = $_GET['id'];
+        $sql = "SELECT name, size, primary_image, amount, Transactions.price AS p
+                FROM Transactions
+                JOIN Invoices ON Transactions.invoice_id=Invoices.id
+                JOIN ShopItem ON Transactions.item_id=ShopItem.id
+                JOIN Inventories ON Inventories.id = ShopItem.iid
+                JOIN Products ON Products.id = Inventories.pid
+                WHERE Invoices.id = ".$id;
 
-    $result = mysqli_query($conn, $sql);
-    $price_sum = 0;
-
+        $result = mysqli_query($conn, $sql);
+        $price_sum = 0;
+    }
     function render_txn($name, $image, $size, $amount, $price)
     {
         echo "<tr>
@@ -65,13 +68,15 @@ WHERE completed=0 && Users.id = 1;";
         </div>
         <main>
             <div id="order-container" class="card">
-                <h1>Order Summary</h1>
+                <h1>Invoice</h1>
                 <table id="item-table">
                     <?php
-                    for ($i = 0; $i < mysqli_num_rows($result); $i++) {
-                        $p = mysqli_fetch_assoc($result);
-                        render_txn($p['name'],$p['primary_image'],$p['size'],$p['amount'],$p['p']);
-                        $price_sum += $p['p'];
+                    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                        for ($i = 0; $i < mysqli_num_rows($result); $i++) {
+                            $p = mysqli_fetch_assoc($result);
+                            render_txn($p['name'],$p['primary_image'],$p['size'],$p['amount'],$p['p']);
+                            $price_sum += $p['p'];
+                        }
                     }
                     ?>
                     <tr class="border-top">
@@ -91,10 +96,6 @@ WHERE completed=0 && Users.id = 1;";
                         <td>$<span><?php echo number_format($price_sum * 1.07, 2)?></span></td>
                     </tr>
                 </table>
-            </div>
-            <div id="payment-container">
-                <a class="button" id="saved-payment" href="../SavedPayment/index.php">Use Saved Payment Method</a>
-                <a class="button" id="new-payment" href="../NewPayment/index.php">Use New Payment Method</a>
             </div>
         </main>
     </div>
