@@ -2,10 +2,12 @@ main {
     width: 80vw;
     margin: auto;
     display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 
 #order-container {
-    width: 45%;
+    width: 50%;
     padding: 1rem 3rem;
 }
 
@@ -37,8 +39,7 @@ td {
 }
 
 #payment-container {
-    width: 55%;
-    margin: 0 0 auto auto;
+    width: 50%;
     display: flex;
     flex-direction: column;
 }
