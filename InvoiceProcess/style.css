@@ -8,6 +8,7 @@ main {
 
 #order-container {
     width: 50%;
+    margin: auto;
     padding: 1rem 3rem;
 }
 
@@ -51,43 +52,4 @@ main {
 
 #total-price {
     font-size: 1.5rem;
-}
-
-#payment-container {
-    width: 55%;
-    margin: 0 0 auto auto;
-    display: flex;
-    flex-direction: column;
-}
-
-input[type=submit] {
-    border-radius: 6px;
-    background: transparent;
-    border: #765 solid 2px;
-    font-size: 1.5rem;
-    padding: 10px 15px;
-    margin: 20px 0 10px auto;
-    margin-bottom: 15px;
-}
-
-#title {
-    background-color: #5cb85c;
-    color: #333;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-#confirm {
-    margin: 0 3rem 2rem;
-}
-
-#envelope-icon {
-    font-size: 2rem;
-    padding-right: 25px;
-}
-
-.info-title {
-    font-size: 1.5rem;
-    font-weight: bold;
 }
