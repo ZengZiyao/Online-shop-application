@@ -26,7 +26,8 @@
 FROM ShopItem
 INNER JOIN Users ON Users.id = ShopItem.uid
 INNER JOIN Inventories ON Inventories.id = ShopItem.iid
-INNER JOIN Products ON Products.id = Inventories.pid;";
+INNER JOIN Products ON Products.id = Inventories.pid
+WHERE completed=0 && Users.id = 1;";
 
     $result = mysqli_query($conn, $sql);
     $price_sum = 0;
@@ -43,7 +44,7 @@ INNER JOIN Products ON Products.id = Inventories.pid;";
                     <p>Size: <span>" . $size . "</span></p>
                 </td>
                 <td>" . $amount . "</td>
-                <td>$" . number_format($amount * $price, 2) . "</td>
+                <td>$" . number_format($price, 2) . "</td>
             </tr>";
     }
     ?>
@@ -77,7 +78,7 @@ INNER JOIN Products ON Products.id = Inventories.pid;";
                         for ($i = 0; $i < mysqli_num_rows($result); $i++) {
                             $p = mysqli_fetch_assoc($result);
                             render_txn($p['name'],$p['primary_image'],$p['size'],$p['amount'],$p['p']);
-                            $price_sum += $p['amount']*$p['p'];
+                            $price_sum += $p['p'];
                         }
                         ?>
                     </tbody>

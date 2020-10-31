@@ -28,7 +28,6 @@
 
     $sql = "SELECT * FROM Products WHERE id = " . $pid;
     $product = mysqli_fetch_assoc(mysqli_query($conn, $sql));
-
     ?>
     <div>
         <div id="nav-bar">
@@ -75,8 +74,7 @@
                         <input type="number" id="qty" name="quantity" value="1" min="1">
                         <div id="button-container">
                             <input type="submit" name="cart" value="Add To Cart" onclick="submitForm(<?php echo $_SERVER['PHP_SELF'] . "?id=" . $pid ?>)">
-                            <!-- TODO: add purchase action -->
-                            <input type="submit" name="purchase" value="Purchase" onclick="submitForm()">
+                            <input type="submit" name="purchase" value="Purchase" disabled>
                         </div>
 
                     </form>
