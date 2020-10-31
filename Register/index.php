@@ -23,7 +23,7 @@
             <div id="header-tail">
                 <span><a id="cart" href="../ShoppingCart/index.php"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
-                <span><a href="../Login/index.php">Account</a></span>
+                <span><a href="../Account/index.php">Account</a></span>
             </div>
         </div>
         <main>
@@ -95,6 +95,12 @@
 
                 mysqli_query($conn, $sql);
     
+                $sql = "SELECT id FROM Users WHERE email = '".$email."'";
+                $uid = mysqli_fetch_assoc(mysqli_query($conn, $sql))["id"];
+
+                session_start();
+                $_SESSION["uid"] = $uid;
+
                 header("Location: http://".$_SERVER["HTTP_HOST"]."/f38ee/Online-shop-application/Shop/index.php");
     
             }
