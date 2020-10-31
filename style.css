@@ -2,7 +2,7 @@
     margin: 0;
     height: 100vh;
     width: 100vw;
-    background: url(../images/landing-bg.jpeg);
+    background: url(./images/landing-bg.jpeg);
     background-size: cover;
 }
 
