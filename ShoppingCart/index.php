@@ -58,7 +58,7 @@ INNER JOIN Products ON Products.id = Inventories.pid;";
             <div id="header-tail">
                 <span><a id="cart"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
-                <span><a href="../Login/index.html">Account</a></span>
+                <span><a href="../Login/index.php">Account</a></span>
             </div>
         </div>
         <main>
