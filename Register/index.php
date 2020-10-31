@@ -73,12 +73,12 @@
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
             $servername = "localhost";
-            $username = "f38ee";
-            $password = "f38ee";
+            $dbuser = "f38ee";
+            $dbpass = "f38ee";
             $dbname = "f38ee";
         
             // Create connection
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
+            $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
             // Check connection
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
@@ -89,7 +89,6 @@
 
             if (mysqli_num_rows($result) > 0) {
                 echo "<script>alert('Account Already Exists!')</script>";
-
             } else {
                 $sql = "INSERT INTO Users(username, email, password_hash, salt) VALUES ('". $username. "', '".$email."', '".$password_hash."', '".$password_hash."')";
 
@@ -101,11 +100,8 @@
                 session_start();
                 $_SESSION["uid"] = $uid;
 
-                header("Location: http://".$_SERVER["HTTP_HOST"]."/f38ee/Online-shop-application/Shop/index.php");
-    
+                header("Location: ../Shop/index.php");
             }
-
-     
         }
     ?>
     <script>

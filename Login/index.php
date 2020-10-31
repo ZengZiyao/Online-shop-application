@@ -71,12 +71,12 @@
             $account_password = $_POST["password"];
 
             $servername = "localhost";
-            $username = "f38ee";
-            $password = "f38ee";
+            $dbuser = "f38ee";
+            $dbpass = "f38ee";
             $dbname = "f38ee";
         
             // Create connection
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
+            $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
             // Check connection
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
@@ -93,7 +93,7 @@
                     session_start();
                     $_SESSION["uid"] = $user["id"];
                     
-                    header("Location: http://".$_SERVER["HTTP_HOST"]."/f38ee/Online-shop-application/Shop/index.php");
+                    header("Location: ../Shop/index.php");
                 } else {
                     echo "<script>alert('Wrong Credentials!')</script>";
                 }
