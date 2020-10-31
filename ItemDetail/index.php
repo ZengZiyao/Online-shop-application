@@ -13,8 +13,6 @@
 
 <body>
     <?php
-    session_start();
-    $uid = $_SESSION["uid"];
     $pid = $_GET["id"];
     $servername = "localhost";
     $dbuser = "f38ee";
@@ -45,6 +43,7 @@
         </div>
         <main>
             <div class="flex-container">
+
                 <div id="gallery-container">
                     <div id="image-column">
                         <img src="<?php echo $product['primary_image'] ?>" alt="product-detail1" class="thumbnail" onclick="selectImage('<?php echo $product['primary_image'] ?>')">
@@ -115,9 +114,13 @@
     </div>
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        session_start();
+        $uid = $_SESSION["uid"];
+
         if (!isset($uid)) {
             echo "<script>window.location.href='../Login/index.php';</script>";
         } else {
+
             $size = $_POST["size"];
             $qty = $_POST["quantity"];
             $price = $_POST["price"];
