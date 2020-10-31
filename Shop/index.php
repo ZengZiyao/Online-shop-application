@@ -46,7 +46,7 @@
             <ul id="nav-list">
                 <li><a href="../Shop/index.php">Shop</a></li>
                 <li><a href="../About/index.html">About</a></li>
-                <li><a href="../Contact/index.html">Contact</a></li>
+                <li><a href="../Contact/index.php">Contact</a></li>
             </ul>
             <h3 id="logo">Anonymous</h3>
             <div id="header-tail">
