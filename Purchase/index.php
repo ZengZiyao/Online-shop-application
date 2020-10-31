@@ -92,12 +92,8 @@ INNER JOIN Products ON Products.id = Inventories.pid;";
                 </table>
             </div>
             <div id="payment-container">
-                <!-- <input id="saved-payment" type="submit" value="Use Saved Payment Method">
-                <input id="new-payment" type="submit" value="Use New Payment Method"> -->
-                <a class="button" id="saved-payment" href="../SavedPayment/index.html">Use Saved Payment Method</a>
-                <a class="button" id="new-payment" href="../NewPayment/index.html">Use New Payment Method</a>
-
-                <!-- <input id="confirm" type="submit" value="Confirm"> -->
+                <a class="button" id="saved-payment" href="../SavedPayment/index.php">Use Saved Payment Method</a>
+                <a class="button" id="new-payment" href="../NewPayment/index.php">Use New Payment Method</a>
             </div>
         </main>
     </div>
