@@ -91,7 +91,7 @@
                 echo "<script>alert('Account Already Exists!')</script>";
 
             } else {
-                $sql = "INSERT INTO Users(username, email, password_hash) VALUES ('". $username. "', '".$email."', '".$password_hash."')";
+                $sql = "INSERT INTO Users(username, email, password_hash, salt) VALUES ('". $username. "', '".$email."', '".$password_hash."', '".$password_hash."')";
 
                 mysqli_query($conn, $sql);
     
