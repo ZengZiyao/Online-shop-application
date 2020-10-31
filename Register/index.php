@@ -59,7 +59,12 @@
                     <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                     <label for="confirm-password">Confirm Password</label>
                     <input type="password" id="confirm-password" name="confirm-password" required>
-                    <input type="submit" name="signup" value="Sign Up" id="signup" onclick="validatePassword()">
+
+                    <div class="flex-container">
+                        <a href="../Login/index.php" id="login">Login</a>
+                        <input type="submit" name="signup" value="Sign Up" id="signup" onclick="validatePassword()">
+                    </div>
+
                 </form>
             </div>
         </main>
