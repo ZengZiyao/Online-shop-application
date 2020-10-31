@@ -13,6 +13,9 @@
 
 <body>
     <?php
+    session_start();
+    $uid = $_SESSION["uid"];
+
     $servername = "localhost";
     $username = "f38ee";
     $password = "f38ee";
@@ -27,11 +30,11 @@ FROM ShopItem
 INNER JOIN Users ON Users.id = ShopItem.uid
 INNER JOIN Inventories ON Inventories.id = ShopItem.iid
 INNER JOIN Products ON Products.id = Inventories.pid
-WHERE completed=0 && Users.id = 1;";
+WHERE completed=0 && Users.id = ".$uid.";";
 
     $result = mysqli_query($conn, $sql);
-    // TODO: uid
-    $addInvoice = "INSERT INTO Invoices(deal_time, uid) VALUES (CURRENT_TIMESTAMP, 1)";
+
+    $addInvoice = "INSERT INTO Invoices(deal_time, uid) VALUES (CURRENT_TIMESTAMP, ".$uid.")";
     mysqli_query($conn, $addInvoice);
     $invoice_id = mysqli_insert_id($conn);
     for ($i = 0; $i < mysqli_num_rows($result); $i++) {

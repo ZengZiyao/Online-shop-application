@@ -18,7 +18,7 @@
     $uid = $_SESSION["uid"];
 
     if (!isset($uid)) {
-        header("Location: http://" . $_SERVER["HTTP_HOST"] . "/f38ee/Online-shop-application/Login/index.php");
+        header("Location: ../Login/index.php");
     } else {
         $servername = "localhost";
         $username = "f38ee";
@@ -79,7 +79,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         unset($_SESSION["uid"]);
         session_destroy();
-        header("Location: http://" . $_SERVER["HTTP_HOST"] . "/f38ee/Online-shop-application/Login/index.php");
+        header("Location: ../Login/index.php");
     }
     ?>
 </body>

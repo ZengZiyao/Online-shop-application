@@ -13,6 +13,10 @@
 
 <body>
     <?php
+            session_start();
+            $uid = $_SESSION["uid"];
+            
+    
     $servername = "localhost";
     $username = "f38ee";
     $password = "f38ee";
@@ -27,7 +31,7 @@ FROM ShopItem
 INNER JOIN Users ON Users.id = ShopItem.uid
 INNER JOIN Inventories ON Inventories.id = ShopItem.iid
 INNER JOIN Products ON Products.id = Inventories.pid
-WHERE completed=0 && Users.id = 1;";
+WHERE completed=0 && Users.id = ".$uid.";";
 
     $result = mysqli_query($conn, $sql);
     $price_sum = 0;
