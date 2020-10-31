@@ -117,30 +117,38 @@
     </div>
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $size = $_POST["size"];
-        $qty = $_POST["quantity"];
-        $price = $_POST["price"];
+        session_start();
+        $uid = $_SESSION["uid"];
+        
+        echo !isset($uid);
 
-        $sql = "SELECT id FROM Inventories WHERE pid = " . $pid . " AND size = '" . $size . "'";
-        $iid = mysqli_fetch_assoc(mysqli_query($conn, $sql))["id"];
-
-        // Update Inventories
-        $sql = "UPDATE Inventories SET inventory = inventory - " . $qty . " WHERE id = " . $iid;
-        mysqli_query($conn, $sql);
-
-        //Insert into ShopItems
-        //TODO: replace uid
-        $sql = "SELECT * FROM ShopItem WHERE iid = ".$iid." AND uid = 1";
-
-        if (mysqli_num_rows(mysqli_query($conn, $sql)) > 0) {
-            $sql = "UPDATE ShopItem SET amount = amount + ".$qty." WHERE iid = ".$iid." AND uid = 1";
+        if (!isset($uid)) {
+            echo "<script>window.location.href='../Login/index.php';</script>";
         } else {
-            $sql = "INSERT INTO ShopItem(iid, amount, uid) VALUES (" . $iid . ", " . $qty . ", 1)";
-        }
-        if (mysqli_query($conn, $sql)) {
-            echo "<script>alert('Product added successfully!');</script>";
-        } else {
-            echo "<script>alert('Something went wrong!');</script>";
+
+            $size = $_POST["size"];
+            $qty = $_POST["quantity"];
+            $price = $_POST["price"];
+
+            $sql = "SELECT id FROM Inventories WHERE pid = " . $pid . " AND size = '" . $size . "'";
+            $iid = mysqli_fetch_assoc(mysqli_query($conn, $sql))["id"];
+
+            // Update Inventories
+            $sql = "UPDATE Inventories SET inventory = inventory - " . $qty . " WHERE id = " . $iid;
+            mysqli_query($conn, $sql);
+
+            //Insert into ShopItems
+            $sql = "SELECT * FROM ShopItem WHERE completed = 0 AND iid = " . $iid . " AND uid = " . $uid;
+            if (mysqli_num_rows(mysqli_query($conn, $sql)) > 0) {
+                $sql = "UPDATE ShopItem SET amount = amount + " . $qty . " WHERE iid = " . $iid . " AND uid = " . $uid;
+            } else {
+                $sql = "INSERT INTO ShopItem(iid, amount, uid) VALUES (" . $iid . ", " . $qty . ", " . $uid . ")";
+            }
+            if (mysqli_query($conn, $sql)) {
+                echo "<script>alert('Product added successfully!');</script>";
+            } else {
+                echo "<script>alert('Something went wrong!');</script>";
+            }
         }
     }
 
