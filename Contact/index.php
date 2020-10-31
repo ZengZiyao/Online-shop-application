@@ -40,16 +40,11 @@
         <main>
             <div id="desc">
                 <h1>Contact Us</h1>
-                <p>Bezig staan steun zal dan. Ik er ze primitieve na districten geruineerd. Wie vijftien weg uitgeput
-                    dezelfde der veertien zee. Mag tin kost niet uren. Al na parasiet of om hellende verbindt. Far gas
-                    oude uit niet ipoh. Dat woekeraars dag
-                    afwachting mee verwijderd feestdagen ingenieurs aanleiding. Liput koopt japan zes zelfs ugong tin.
-                    Er af zuiger twaalf lengte andere koffie voeren. Op besluit ad geplant geheven op haalden beneden
-                    of. Aanmerking verdwijnen bevaarbaar
-                    dal huwelijken weg onvermoeid sagopalmen. Af cultures werkzaam kinderen ad te zuiniger in verwoede.
-                    Jungle andere loopen tronoh ik de al. Hitte leven ijzer de te ad na. Kintya ruimer gelukt in nu.
-                    Deden goten ten hitte haven rijst
-                    met. De chinees nu op systeem zooveel te gebruik.
+                <p>Let's be honest ... these days, most people would much rather fill out 
+                    a form than get on the phone and talk to someone. When choosing what 
+                    to ask people in your forms, make sure you choose ones that'll help your 
+                    specific business understand the person contacting you -- and even help 
+                    you qualify them as a potential lead.
                 </p>
             </div>
             <div id="form-container" class="card">

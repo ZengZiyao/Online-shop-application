@@ -33,6 +33,34 @@
         $sql = "SELECT * FROM Users WHERE id = " . $uid;
 
         $user = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+
+        $invoice_id_SQL = "SELECT id FROM Invoices WHERE uid = ".$uid.";";
+        $invoice_id = mysqli_query($conn, $invoice_id_SQL);
+
+        $invoice_SQL = "SELECT name, size, primary_image, amount, Transactions.price AS p
+                FROM Transactions
+                JOIN Invoices ON Transactions.invoice_id=Invoices.id
+                JOIN ShopItem ON Transactions.item_id=ShopItem.id
+                JOIN Inventories ON Inventories.id = ShopItem.iid
+                JOIN Products ON Products.id = Inventories.pid
+                WHERE Invoices.id = ";
+    }
+
+    function render_txn($name, $image, $size, $amount, $price)
+    {
+        echo "<tr>
+                <td class='image-cell'>
+                    <img class='item-image' src='" . $image . "' alt='product1'>
+                </td>
+                <td>
+                    <p>" . $name . "</p>
+                    <p>Size: <span>" . $size . "</span></p>
+                </td>
+                <td>
+                    <p>QTY <span>" . $amount . "</span></p>
+                    <p>Price $" . number_format($price, 2) . "</p>
+                </td>
+            </tr>";
     }
     ?>
     <div>
@@ -50,26 +78,33 @@
             </div>
         </div>
         <main>
+            <h1 id="header">Profile</h1>
             <table>
-                <thead>
-                    <tr>
-                        <th colspan="2">Profile</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="field-name">Username</td>
-                        <td><?php echo $user["username"] ?></td>
-                    </tr>
-                    <tr>
-                        <td class="field-name">Email</td>
-                        <td><?php echo $user["email"] ?></td>
-                    </tr>
-                </tbody>
+                <tr>
+                    <td class="field-name">Username</td>
+                    <td><?php echo $user["username"] ?></td>
+                </tr>
+                <tr>
+                    <td class="field-name">Email</td>
+                    <td><?php echo $user["email"] ?></td>
+                </tr>
             </table>
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
                 <input type="submit" value="Logout">
             </form>
+            <h1 id="header">Transaction History</h1>
+            <table>
+                <?php
+                for ($j = 0; $j < mysqli_num_rows($invoice_id); $j++) {
+                    $id = mysqli_fetch_assoc($invoice_id)['id'];
+                    $result = mysqli_query($conn, $invoice_SQL.$id);
+                    for ($i = 0; $i < mysqli_num_rows($result); $i++) {
+                        $p = mysqli_fetch_assoc($result);
+                        render_txn($p['name'],$p['primary_image'],$p['size'],$p['amount'],$p['p']);
+                    }
+                }
+                ?>
+            </table>
         </main>
     </div>
     <?php
