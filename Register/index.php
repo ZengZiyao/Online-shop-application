@@ -64,7 +64,6 @@
                         <a href="../Login/index.php" id="login">Login</a>
                         <input type="submit" name="signup" value="Sign Up" id="signup" onclick="validatePassword()">
                     </div>
-
                 </form>
             </div>
         </main>
