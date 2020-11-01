@@ -33,7 +33,7 @@
                 INNER JOIN Users ON Users.id = ShopItem.uid
                 INNER JOIN Inventories ON Inventories.id = ShopItem.iid
                 INNER JOIN Products ON Products.id = Inventories.pid
-                WHERE completed=0 && Users.id = ".$uid.";";
+                WHERE completed=0 && Users.id = " . $uid . ";";
 
         $result = mysqli_query($conn, $sql);
         $price_sum = 0;
@@ -42,11 +42,11 @@
     {
         echo "<tr>
                 <td>
-                <form action=".$_SERVER['PHP_SELF']." method='POST'>
+                <form action=" . $_SERVER['PHP_SELF'] . " method='POST'>
                 <span class='delete'><input type='submit' value='X' /></span>
-                <input type='hidden' name='id' value=".$id." />
-                <input type='hidden' name='iid' value=".$iid." />
-                <input type='hidden' name='amount' value=".$amount." />
+                <input type='hidden' name='id' value=" . $id . " />
+                <input type='hidden' name='iid' value=" . $iid . " />
+                <input type='hidden' name='amount' value=" . $amount . " />
                 </form>
                 </td>
                 <td class='image-cell'>
@@ -90,7 +90,7 @@
                         <?php
                         for ($i = 0; $i < mysqli_num_rows($result); $i++) {
                             $p = mysqli_fetch_assoc($result);
-                            render_txn($p['id'], $p['iid'], $p['name'],$p['primary_image'],$p['size'],$p['amount'],$p['p']);
+                            render_txn($p['id'], $p['iid'], $p['name'], $p['primary_image'], $p['size'], $p['amount'], $p['p']);
                             $price_sum += $p['p'];
                         }
                         ?>
@@ -98,14 +98,14 @@
                 </table>
             </div>
             <div class="flex-container">
-                <p class="flex-item" id="total-price">Total: $<?php echo number_format($price_sum, 2)?></p>
+                <p class="flex-item" id="total-price">Total: $<?php echo number_format($price_sum, 2) ?></p>
                 <a class="flex-item button" href="../Purchase/index.php">Check out</a>
             </div>
         </main>
     </div>
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $delete = "DELETE FROM ShopItem WHERE id=".$_POST['id'];
+        $delete = "DELETE FROM ShopItem WHERE id=" . $_POST['id'];
         if (!mysqli_query($conn, $delete)) {
             echo "<script>alert('Deletion failed');</script>";
         }
@@ -113,7 +113,13 @@
         if (!mysqli_query($conn, $addInventory)) {
             echo "<script>alert('Add inventory failed');</script>";
         }
-        header("Refresh:0");
+        
+        echo "<script>    
+        if (!window.location.hash) {
+            window.location = window.location + '#loaded';
+            window.location.reload();
+        };
+        </script>";
     }
     ?>
 </body>
