@@ -28,7 +28,7 @@
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        $sql = "SELECT name, size, primary_image, amount, Products.price * amount AS p
+        $sql = "SELECT ShopItem.id AS id, ShopItem.iid AS iid, name, size, primary_image, amount, Products.price * amount AS p
                 FROM ShopItem
                 INNER JOIN Users ON Users.id = ShopItem.uid
                 INNER JOIN Inventories ON Inventories.id = ShopItem.iid
@@ -38,10 +38,17 @@
         $result = mysqli_query($conn, $sql);
         $price_sum = 0;
     }
-    function render_txn($name, $image, $size, $amount, $price)
+    function render_txn($id, $iid, $name, $image, $size, $amount, $price)
     {
         echo "<tr>
-                <td><span class='delete'>X</span></td>
+                <td>
+                <form action=".$_SERVER['PHP_SELF']." method='POST'>
+                <span class='delete'><input type='submit' value='X' /></span>
+                <input type='hidden' name='id' value=".$id." />
+                <input type='hidden' name='iid' value=".$iid." />
+                <input type='hidden' name='amount' value=".$amount." />
+                </form>
+                </td>
                 <td class='image-cell'>
                     <img class='item-image' src=" . $image . " alt='product1'>
                 </td>
@@ -83,7 +90,7 @@
                         <?php
                         for ($i = 0; $i < mysqli_num_rows($result); $i++) {
                             $p = mysqli_fetch_assoc($result);
-                            render_txn($p['name'],$p['primary_image'],$p['size'],$p['amount'],$p['p']);
+                            render_txn($p['id'], $p['iid'], $p['name'],$p['primary_image'],$p['size'],$p['amount'],$p['p']);
                             $price_sum += $p['p'];
                         }
                         ?>
@@ -96,6 +103,19 @@
             </div>
         </main>
     </div>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $delete = "DELETE FROM ShopItem WHERE id=".$_POST['id'];
+        if (!mysqli_query($conn, $delete)) {
+            echo "<script>alert('Deletion failed');</script>";
+        }
+        $addInventory = "UPDATE Inventories SET inventory = inventory + " . $_POST['amount'] . " WHERE id = " . $_POST['iid'];
+        if (!mysqli_query($conn, $addInventory)) {
+            echo "<script>alert('Add inventory failed');</script>";
+        }
+        header("Refresh:0");
+    }
+    ?>
 </body>
 
 </html>
