@@ -13,11 +13,8 @@
 
 <body>
     <?php
-
-session_start();
-$uid = $_SESSION["uid"];
-
-
+    session_start();
+    $uid = $_SESSION["uid"];
     $servername = "localhost";
     $dbuser = "f38ee";
     $dbpass = "f38ee";
@@ -28,11 +25,11 @@ $uid = $_SESSION["uid"];
     }
 
     $sql = "SELECT name, size, primary_image, amount, Products.price * amount AS p
-FROM ShopItem
-INNER JOIN Users ON Users.id = ShopItem.uid
-INNER JOIN Inventories ON Inventories.id = ShopItem.iid
-INNER JOIN Products ON Products.id = Inventories.pid
-WHERE completed=0 && Users.id = ".$uid.";";
+            FROM ShopItem
+            INNER JOIN Users ON Users.id = ShopItem.uid
+            INNER JOIN Inventories ON Inventories.id = ShopItem.iid
+            INNER JOIN Products ON Products.id = Inventories.pid
+            WHERE completed=0 && Users.id = ".$uid.";";
 
     $result = mysqli_query($conn, $sql);
     $price_sum = 0;

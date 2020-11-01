@@ -89,19 +89,16 @@
                 $user = mysqli_fetch_assoc($result);
 
                 if (password_verify($account_password, $user["password_hash"])) {
-    
                     session_start();
                     $_SESSION["uid"] = $user["id"];
-                    
+
                     header("Location: ../Shop/index.php");
                 } else {
                     echo "<script>alert('Wrong Credentials!')</script>";
                 }
             } else {
                 echo "<script>alert('Account does not exist!')</script>";
-
             }
-
         }
     ?>
 </body>
