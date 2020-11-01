@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="./style.css">
-    <title>Shop</title>
+    <title>Contact</title>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
                 <li><a href="../About/index.html">About</a></li>
                 <li><a href="../Contact/index.php">Contact</a></li>
             </ul>
-            <h3 id="logo">Anonymous</h3>
+            <h3 id="logo"><a href="../index.html">Anonymous</a></h3>
             <div id="header-tail">
                 <span><a id="cart" href="../ShoppingCart/index.php"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
