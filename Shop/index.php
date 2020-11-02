@@ -14,12 +14,12 @@
 <body>
     <?php 
         $servername = "localhost";
-        $username = "f38ee";
-        $password = "f38ee";
+        $dbuser = "f38ee";
+        $dbpass = "f38ee";
         $dbname = "f38ee";
     
         // Create connection
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -46,13 +46,13 @@
             <ul id="nav-list">
                 <li><a href="../Shop/index.php">Shop</a></li>
                 <li><a href="../About/index.html">About</a></li>
-                <li><a href="../Contact/index.html">Contact</a></li>
+                <li><a href="../Contact/index.php">Contact</a></li>
             </ul>
-            <h3 id="logo">Anonymous</h3>
+            <h3 id="logo"><a href="../index.html">Anonymous</a></h3>
             <div id="header-tail">
                 <span><a id="cart" href="../ShoppingCart/index.php"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
-                <span><a href="../Login/index.html">Account</a></span>
+                <span><a href="../Account/index.php">Account</a></span>
             </div>
         </div>
         <main>
@@ -80,10 +80,10 @@
             </div>
             <div id="clothes-listing">
                 <?php
-                for ($i = 0; $i < mysqli_num_rows($result); $i++) {
-                    $product = mysqli_fetch_assoc($result);
-                    render_product($product['id'], $product['price'], $product['name'], $product['image_url']);
-                }
+                        for ($i = 0; $i < mysqli_num_rows($result); $i++) {
+                            $product = mysqli_fetch_assoc($result);
+                            render_product($product['id'], $product['price'], $product['name'], $product['image_url']);
+                        }
                 ?>
             </div>
         </main>

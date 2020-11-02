@@ -8,40 +8,39 @@
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="./style.css">
-    <title>Shop</title>
+    <title>Shop Item</title>
 </head>
 
 <body>
     <?php
+    session_start();
+    $uid = $_SESSION["uid"];
     $pid = $_GET["id"];
     $servername = "localhost";
-    $username = "f38ee";
-    $password = "f38ee";
+    $dbuser = "f38ee";
+    $dbpass = "f38ee";
     $dbname = "f38ee";
 
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    // Check connection
+    $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
     $sql = "SELECT * FROM Products WHERE id = " . $pid;
     $product = mysqli_fetch_assoc(mysqli_query($conn, $sql));
-
     ?>
     <div>
         <div id="nav-bar">
             <ul id="nav-list">
                 <li><a href="../Shop/index.php">Shop</a></li>
                 <li><a href="../About/index.html">About</a></li>
-                <li><a href="../Contact/index.html">Contact</a></li>
+                <li><a href="../Contact/index.php">Contact</a></li>
             </ul>
-            <h3 id="logo">Anonymous</h3>
+            <h3 id="logo"><a href="../index.html">Anonymous</a></h3>
             <div id="header-tail">
                 <span><a id="cart" href="../ShoppingCart/index.php"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
-                <span><a href="../Login/index.html">Account</a></span>
+                <span><a href="../Account/index.php">Account</a></span>
             </div>
         </div>
         <main>
@@ -65,17 +64,17 @@
                     <form id="form" method="POST">
                         <input type="hidden" name="price" value="<?php echo $product['price'] ?>">
                         <select name="size" id="size">
-                            <option value="" selected>Select Size</option>
                             <option value="S">S</option>
-                            <option value="M">M</option>
+                            <option value="M" selected>M</option>
                             <option value="L">L</option>
                             <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+
                         </select>
                         <input type="number" id="qty" name="quantity" value="1" min="1">
                         <div id="button-container">
                             <input type="submit" name="cart" value="Add To Cart" onclick="submitForm(<?php echo $_SERVER['PHP_SELF'] . "?id=" . $pid ?>)">
-                            <!-- TODO: add purchase action -->
-                            <input type="submit" name="purchase" value="Purchase" onclick="submitForm()">
+                            <input type="submit" name="purchase" value="Purchase" disabled>
                         </div>
 
                     </form>
@@ -109,29 +108,41 @@
                         render_product($product['id'], $product['price'], $product['name'], $product['image_url']);
                     }
                     ?>
+
                 </div>
+
             </div>
         </main>
     </div>
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $size = $_POST["size"];
-        $qty = $_POST["quantity"];
-        $price = $_POST["price"];
+        if (!isset($uid)) {
+            echo "<script>window.location.href='../Login/index.php';</script>";
+        } else {
+            $size = $_POST["size"];
+            $qty = $_POST["quantity"];
+            $price = $_POST["price"];
 
-        $sql = "SELECT id FROM Inventories WHERE pid = " . $pid . " AND size = '" . $size . "'";
-        $iid = mysqli_fetch_assoc(mysqli_query($conn, $sql))["id"];
+            $sql = "SELECT id FROM Inventories WHERE pid = " . $pid . " AND size = '" . $size . "'";
+            $iid = mysqli_fetch_assoc(mysqli_query($conn, $sql))["id"];
 
-        // Update Inventories
-        $sql = "UPDATE Inventories SET inventory = inventory - " . $qty . " WHERE id = " . $iid;
-        mysqli_query($conn, $sql);
+            // Update Inventories
+            $sql = "UPDATE Inventories SET inventory = inventory - " . $qty . " WHERE id = " . $iid;
+            mysqli_query($conn, $sql);
 
-        //Insert into ShopItems
-        //TODO: replace uid
-        $sql = "INSERT INTO ShopItem(iid, amount, uid) VALUES (" . $iid . ", " . $qty . ", 1)";
-        mysqli_query($conn, $sql);
-
-        echo "<script>alert('Product added successfully!');</script>";
+            //Insert into ShopItems
+            $sql = "SELECT * FROM ShopItem WHERE completed = 0 AND iid = " . $iid . " AND uid = " . $uid;
+            if (mysqli_num_rows(mysqli_query($conn, $sql)) > 0) {
+                $sql = "UPDATE ShopItem SET amount = amount + " . $qty . " WHERE iid = " . $iid . " AND uid = " . $uid;
+            } else {
+                $sql = "INSERT INTO ShopItem(iid, amount, uid) VALUES (" . $iid . ", " . $qty . ", " . $uid . ")";
+            }
+            if (mysqli_query($conn, $sql)) {
+                echo "<script>alert('Product added successfully!');</script>";
+            } else {
+                echo "<script>alert('Something went wrong!');</script>";
+            }
+        }
     }
 
     ?>

@@ -15,8 +15,9 @@ a {
 
 #nav-bar {
     position: relative;
-    display: flex;
     width: 90vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
     height: 10rem;
     margin: auto;
@@ -37,6 +38,7 @@ a {
 #header-tail {
     font-size: 2rem;
     margin: auto 20px;
+    justify-self: end;
 }
 
 #header-tail>span {
@@ -44,7 +46,6 @@ a {
 }
 
 #logo {
-    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,7 +54,6 @@ a {
     font-size: 4rem;
     height: 100%;
     top: 0;
-    z-index: -1;
 }
 
 .card {
