@@ -45,6 +45,14 @@ WHERE completed=0 && Users.id = ".$uid.";";
         echo $addTxn."<br>";
         mysqli_query($conn, $addTxn);
     }
+
+    $to = "f38ee@localhost";
+    $subject = "Order Confirmation";
+    $message = "Thanks you for your order. Please find your invoice via this link: http://".$_SERVER['HTTP_HOST']."/f38ee/Online-shop-application/InvoiceProcess/invoice.php?id=".$invoice_id;
+    $headers = "From:  f38ee@localhost"."\r\n"."Reply-To: f38ee@localhost"."\r\n"."X-Mailer: PHP/".phpversion();
+
+    mail($to, $subject, $message, $headers, "-ff38ee@localhost");
+
     header("Location: ./invoice.php?id=".$invoice_id);
     ?>
 </body>
