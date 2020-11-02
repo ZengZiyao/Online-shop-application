@@ -29,6 +29,7 @@
 //     echo "Failed drop";
 // }
 include "init_user.php";
+include "init_message.php";
 include "init_product.php";
 include "init_inventory.php";
 include "init_txn.php";

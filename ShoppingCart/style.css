@@ -55,3 +55,10 @@ td {
     padding: 10px 15px;
     margin-left: auto;
 }
+
+input[type=submit] {
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    color: rgb(116, 21, 21);
+}

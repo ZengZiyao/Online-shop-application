@@ -11,16 +11,17 @@ if (!$conn) {
     die("Connection failed: ".mysqli_connect_error());
 }
 
-$sql = "CREATE TABLE IF NOT EXISTS Inventories (
+$sql = "CREATE TABLE IF NOT EXISTS Messages (
     id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    pid INT UNSIGNED NOT NULL,
-    size CHAR(3) NOT NULL,
-    inventory INT DEFAULT 100,
-    FOREIGN KEY(pid) REFERENCES Products(id)
+    fname VARCHAR(20) NOT NULL,
+    lname VARCHAR(20) NOT NULL,
+    email VARCHAR(200) NOT NULL,
+    message VARCHAR(1000) NOT NULL,
+    sub BOOLEAN NOT NULL
 )";
 
 if (mysqli_query($conn, $sql)) {
-    echo "Table Inventories created successfully";
+    echo "Table Messages created successfully";
 } else {
     echo "Failed creation";
 }

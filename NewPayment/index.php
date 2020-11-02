@@ -8,25 +8,28 @@
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="./style.css">
-    <title>Shop</title>
+    <title>New Payment</title>
 </head>
 
 <body>
     <?php
+    session_start();
+    $uid = $_SESSION["uid"];
     $servername = "localhost";
-    $username = "f38ee";
-    $password = "f38ee";
+    $dbuser = "f38ee";
+    $dbpass = "f38ee";
     $dbname = "f38ee";
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
     $sql = "SELECT name, size, primary_image, amount, Products.price * amount AS p
-FROM ShopItem
-INNER JOIN Users ON Users.id = ShopItem.uid
-INNER JOIN Inventories ON Inventories.id = ShopItem.iid
-INNER JOIN Products ON Products.id = Inventories.pid;";
+            FROM ShopItem
+            INNER JOIN Users ON Users.id = ShopItem.uid
+            INNER JOIN Inventories ON Inventories.id = ShopItem.iid
+            INNER JOIN Products ON Products.id = Inventories.pid
+            WHERE completed=0 && Users.id = ".$uid.";";
 
     $result = mysqli_query($conn, $sql);
     $price_sum = 0;
@@ -43,7 +46,7 @@ INNER JOIN Products ON Products.id = Inventories.pid;";
                 </td>
                 <td>
                     <p>QTY <span>" . $amount . "</span></p>
-                    <p>Price $" . number_format($amount * $price, 2) . "</p>
+                    <p>Price $" . number_format($price, 2) . "</p>
                 </td>
             </tr>";
     }
@@ -53,13 +56,13 @@ INNER JOIN Products ON Products.id = Inventories.pid;";
             <ul id="nav-list">
                 <li><a href="../Shop/index.php">Shop</a></li>
                 <li><a href="../About/index.html">About</a></li>
-                <li><a href="../Contact/index.html">Contact</a></li>
+                <li><a href="../Contact/index.php">Contact</a></li>
             </ul>
-            <h3 id="logo">Anonymous</h3>
+            <h3 id="logo"><a href="../index.html">Anonymous</a></h3>
             <div id="header-tail">
                 <span><a id="cart" href="../ShoppingCart/index.php"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
-                <span><a href="../Login/index.html">Account</a></span>
+                <span><a href="../Account/index.php">Account</a></span>
             </div>
         </div>
         <main>
@@ -70,7 +73,7 @@ INNER JOIN Products ON Products.id = Inventories.pid;";
                     for ($i = 0; $i < mysqli_num_rows($result); $i++) {
                         $p = mysqli_fetch_assoc($result);
                         render_txn($p['name'],$p['primary_image'],$p['size'],$p['amount'],$p['p']);
-                        $price_sum += $p['amount']*$p['p'];
+                        $price_sum += $p['p'];
                     }
                     ?>
                     <tr class="border-top">
@@ -92,7 +95,7 @@ INNER JOIN Products ON Products.id = Inventories.pid;";
                 </table>
             </div>
             <div id="info-container">
-                <form class="card">
+                <form class="card"  action="../InvoiceProcess/index.php" method="POST">
                     <div id="title">
                         <p>Use New Payment Method</p>
                     </div>

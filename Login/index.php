@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="./style.css">
-    <title>Shop</title>
+    <title>Login</title>
 </head>
 
 <body>
@@ -17,13 +17,13 @@
             <ul id="nav-list">
                 <li><a href="../Shop/index.php">Shop</a></li>
                 <li><a href="../About/index.html">About</a></li>
-                <li><a href="../Contact/index.html">Contact</a></li>
+                <li><a href="../Contact/index.php">Contact</a></li>
             </ul>
-            <h3 id="logo">Anonymous</h3>
+            <h3 id="logo"><a href="../index.html">Anonymous</a></h3>
             <div id="header-tail">
                 <span><a id="cart" href="../ShoppingCart/index.php"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
-                <span><a href="../Login/index.html">Account</a></span>
+                <span><a href="../Account/index.php">Account</a></span>
             </div>
         </div>
         <main>
@@ -50,28 +50,57 @@
                 </div>
             </div>
             <div id="form-container" class="card">
-                <form action="">
-                    <div id="sub-container">
-                        <div>
-                            <label for="fname">First Name</label>
-                            <input type="text" id="fname" name="fname">
-                        </div>
-                        <div>
-                            <label for="lname">Last Name</label>
-                            <input type="text" id="lname" name="lname">
-                        </div>
-                    </div>
+                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                    <img src="../images/avatar.png" alt="avatar" class="avatar">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email">
+                    <input type="email" id="email" name="email" required>
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password">
-                    <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password">
-                    <input type="submit" name="signup" value="Sign Up" id="signup">
+                    <input type="password" id="password" name="password" required>
+
+                    <div class="flex-container">
+                        <a href="../Register/index.php" id="sign-up">Sign up</a>
+                        <input type="submit" name="login" value="Log in" id="login">
+                    </div>
                 </form>
             </div>
         </main>
     </div>
+    <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = $_POST["email"];
+            $account_password = $_POST["password"];
+
+            $servername = "localhost";
+            $dbuser = "f38ee";
+            $dbpass = "f38ee";
+            $dbname = "f38ee";
+        
+            // Create connection
+            $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
+            // Check connection
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+
+            $sql = "SELECT id, password_hash FROM Users WHERE email = '".$email."'";
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                $user = mysqli_fetch_assoc($result);
+
+                if (password_verify($account_password, $user["password_hash"])) {
+                    session_start();
+                    $_SESSION["uid"] = $user["id"];
+
+                    header("Location: ../Shop/index.php");
+                } else {
+                    echo "<script>alert('Wrong Credentials!')</script>";
+                }
+            } else {
+                echo "<script>alert('Account does not exist!')</script>";
+            }
+        }
+    ?>
 </body>
 
 </html>

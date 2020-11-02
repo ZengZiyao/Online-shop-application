@@ -8,33 +8,47 @@
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="./style.css">
-    <title>Shop</title>
+    <title>Shopping Cart</title>
 </head>
 
 <body>
     <?php
-    $servername = "localhost";
-    $username = "f38ee";
-    $password = "f38ee";
-    $dbname = "f38ee";
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
+    session_start();
+    $uid = $_SESSION["uid"];
+
+    if (!isset($uid)) {
+        header("Location: ../Login/index.php");
+    } else {
+        $servername = "localhost";
+        $dbuser = "f38ee";
+        $dbpass = "f38ee";
+        $dbname = "f38ee";
+        $conn = mysqli_connect($servername, $dbuser, $dbpass, $dbname);
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+        $sql = "SELECT ShopItem.id AS id, ShopItem.iid AS iid, name, size, primary_image, amount, Products.price * amount AS p
+                FROM ShopItem
+                INNER JOIN Users ON Users.id = ShopItem.uid
+                INNER JOIN Inventories ON Inventories.id = ShopItem.iid
+                INNER JOIN Products ON Products.id = Inventories.pid
+                WHERE completed=0 && Users.id = " . $uid . ";";
+
+        $result = mysqli_query($conn, $sql);
+        $price_sum = 0;
     }
-
-    $sql = "SELECT name, size, primary_image, amount, Products.price * amount AS p
-FROM ShopItem
-INNER JOIN Users ON Users.id = ShopItem.uid
-INNER JOIN Inventories ON Inventories.id = ShopItem.iid
-INNER JOIN Products ON Products.id = Inventories.pid;";
-
-    $result = mysqli_query($conn, $sql);
-    $price_sum = 0;
-
-    function render_txn($name, $image, $size, $amount, $price)
+    function render_txn($id, $iid, $name, $image, $size, $amount, $price)
     {
         echo "<tr>
-                <td><span class='delete'>X</span></td>
+                <td>
+                <form action=" . $_SERVER['PHP_SELF'] . " method='POST'>
+                <span class='delete'><input type='submit' value='X' /></span>
+                <input type='hidden' name='id' value=" . $id . " />
+                <input type='hidden' name='iid' value=" . $iid . " />
+                <input type='hidden' name='amount' value=" . $amount . " />
+                </form>
+                </td>
                 <td class='image-cell'>
                     <img class='item-image' src=" . $image . " alt='product1'>
                 </td>
@@ -43,7 +57,7 @@ INNER JOIN Products ON Products.id = Inventories.pid;";
                     <p>Size: <span>" . $size . "</span></p>
                 </td>
                 <td>" . $amount . "</td>
-                <td>$" . number_format($amount * $price, 2) . "</td>
+                <td>$" . number_format($price, 2) . "</td>
             </tr>";
     }
     ?>
@@ -52,13 +66,13 @@ INNER JOIN Products ON Products.id = Inventories.pid;";
             <ul id="nav-list">
                 <li><a href="../Shop/index.php">Shop</a></li>
                 <li><a href="../About/index.html">About</a></li>
-                <li><a href="../Contact/index.html">Contact</a></li>
+                <li><a href="../Contact/index.php">Contact</a></li>
             </ul>
-            <h3 id="logo">Anonymous</h3>
+            <h3 id="logo"><a href="../index.html">Anonymous</a></h3>
             <div id="header-tail">
                 <span><a id="cart"><i class="fa fa-shopping-cart"></i></a></span>
                 <span>|</span>
-                <span><a href="../Login/index.html">Account</a></span>
+                <span><a href="../Account/index.php">Account</a></span>
             </div>
         </div>
         <main>
@@ -76,19 +90,38 @@ INNER JOIN Products ON Products.id = Inventories.pid;";
                         <?php
                         for ($i = 0; $i < mysqli_num_rows($result); $i++) {
                             $p = mysqli_fetch_assoc($result);
-                            render_txn($p['name'],$p['primary_image'],$p['size'],$p['amount'],$p['p']);
-                            $price_sum += $p['amount']*$p['p'];
+                            render_txn($p['id'], $p['iid'], $p['name'], $p['primary_image'], $p['size'], $p['amount'], $p['p']);
+                            $price_sum += $p['p'];
                         }
                         ?>
                     </tbody>
                 </table>
             </div>
             <div class="flex-container">
-                <p class="flex-item" id="total-price">Total: $<?php echo number_format($price_sum, 2)?></p>
+                <p class="flex-item" id="total-price">Total: $<?php echo number_format($price_sum, 2) ?></p>
                 <a class="flex-item button" href="../Purchase/index.php">Check out</a>
             </div>
         </main>
     </div>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $delete = "DELETE FROM ShopItem WHERE id=" . $_POST['id'];
+        if (!mysqli_query($conn, $delete)) {
+            echo "<script>alert('Deletion failed');</script>";
+        }
+        $addInventory = "UPDATE Inventories SET inventory = inventory + " . $_POST['amount'] . " WHERE id = " . $_POST['iid'];
+        if (!mysqli_query($conn, $addInventory)) {
+            echo "<script>alert('Add inventory failed');</script>";
+        }
+        
+        echo "<script>    
+        if (!window.location.hash) {
+            window.location = window.location + '#loaded';
+            window.location.reload();
+        };
+        </script>";
+    }
+    ?>
 </body>
 
 </html>
