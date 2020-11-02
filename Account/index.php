@@ -111,7 +111,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         unset($_SESSION["uid"]);
         session_destroy();
-        header("Location: ../Login/index.php");
+        echo "<script>window.location = '../Login/index.php';</script>";
     }
     ?>
 </body>
