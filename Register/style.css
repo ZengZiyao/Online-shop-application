@@ -2,7 +2,7 @@
 
 main {
     display: flex;
-    width: 90vw;
+    width: 90%;
     margin: auto;
     justify-content: space-between;
     padding-bottom: 10vh;
@@ -62,7 +62,6 @@ main {
     }
 }
 
-
 /* Select every element */
 
 [id^="item"] {
@@ -82,8 +81,7 @@ main {
     opacity: 1;
 }
 
-#item-2:target~.item-2,
-#item-3:target~.item-3 {
+#item-2:target~.item-2, #item-3:target~.item-3 {
     z-index: 3;
     opacity: 1;
 }
