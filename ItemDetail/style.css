@@ -1,5 +1,5 @@
 main {
-    width: 90vw;
+    width: 90%;
     margin: auto;
     padding-bottom: 10vh;
 }
@@ -96,4 +96,10 @@ input[type=submit] {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+@media (max-width: 1600px) {
+    #clothes-listing {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }

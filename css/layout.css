@@ -4,6 +4,10 @@ html {
     color: rgb(82, 82, 82);
 }
 
+body {
+    min-width: 1300px;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -15,7 +19,7 @@ a {
 
 #nav-bar {
     position: relative;
-    width: 90vw;
+    width: 90%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
