@@ -1,6 +1,6 @@
 main {
     padding-top: 2vh;
-    width: 80vw;
+    width: 80%;
     margin: auto;
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -8,7 +8,7 @@ main {
 
 #img-container {
     overflow: hidden;
-    margin-right: 4rem;
+    margin: 0 4rem 2rem 4rem;
 }
 
 #img-container img {
@@ -20,4 +20,10 @@ main {
     line-height: 4rem;
     padding: 0 10rem 2rem;
     margin-bottom: 5rem;
+}
+
+@media (max-width: 1600px) {
+    main {
+        grid-template-columns: 1fr;
+    }
 }

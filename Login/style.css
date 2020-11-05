@@ -2,7 +2,7 @@
 
 main {
     display: flex;
-    width: 90vw;
+    width: 90%;
     margin: auto;
     justify-content: space-between;
     padding-bottom: 10vh;
