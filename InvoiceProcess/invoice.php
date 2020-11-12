@@ -13,6 +13,8 @@
 
 <body>
     <?php
+    session_start();
+    $uid = $_SESSION["uid"];
     $servername = "localhost";
     $dbuser = "f38ee";
     $dbpass = "f38ee";
@@ -30,7 +32,7 @@
                 JOIN ShopItem ON Transactions.item_id=ShopItem.id
                 JOIN Inventories ON Inventories.id = ShopItem.iid
                 JOIN Products ON Products.id = Inventories.pid
-                WHERE Invoices.id = ".$id;
+                WHERE Invoices.id = ".$id ." AND Invoices.uid = ".$uid;
 
         $result = mysqli_query($conn, $sql);
         $price_sum = 0;

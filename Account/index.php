@@ -107,7 +107,6 @@
         </main>
     </div>
     <?php
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         unset($_SESSION["uid"]);
         session_destroy();

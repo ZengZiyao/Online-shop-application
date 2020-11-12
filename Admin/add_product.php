@@ -35,8 +35,7 @@
                     <div class="flex-container">
                         <div>
                             <label for="price">Price</label>
-                            <input type="number" name="price" min="0" required>
-
+                            <input type="number" name="price" min="0" step="0.01" required>
                         </div>
                         <div>
                             <label for="inventory">Inventory</label>
