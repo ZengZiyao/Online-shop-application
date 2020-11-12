@@ -53,3 +53,24 @@ main {
 #total-price {
     font-size: 1.5rem;
 }
+
+.full-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30vh;
+}
+
+.full-page h1 {
+    color: rgb(198, 36, 36);
+    margin-bottom: 8rem;
+}
+
+#go-back button {
+    background: transparent;
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    box-shadow: 1px 3px 5px #3338;
+    cursor: pointer;
+}
